@@ -1,3 +1,10 @@
+<!---
+	Developed by Ryan McIlmoyl for dominKnow Learning Systems Inc.
+
+	This code is provided freely to the public for any use, including in commercial projects, with no further requirements.  However,
+	if you are going to modify the code, please consider contributing it back.
+	http://github.com/ryanmcilmoyl/CFUserVoiceSSO
+--->
 <cfcomponent>
 	<cfproperty name="accountKey" type="string" />
 	<cfproperty name="apiKey" type="string" /> 
