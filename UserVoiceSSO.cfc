@@ -35,12 +35,15 @@
 		</cfif>
 		<cfscript>
 			//Ensure any provided fields are lower-cased
-			if (structKeyExists(arguments.user, "expires") AND isDate(arguments.user.expires)) {
-				userStruct["expires"] = arguments.user.expires;
+			if (!structKeyExists(arguments.user, "expires")) {
+				arguments.user.expires = dateAdd("d", 1, now());
+			}
+			if (isDate(arguments.user.expires)) {
+				arguments.user.expires = dateConvert("local2UTC", arguments.user.expires);
+				userStruct["expires"] = dateFormat(arguments.user.expires, "yyyy-mm-dd") & " " & timeFormat(arguments.user.expires, "hh:mm:ss");
 			}
 			else {
-				userStruct["expires"] = dateFormat(dateConvert("local2UTC", dateAdd("d", 1, now())), "yyyy-mm-dd") & " " & 
-					timeFormat(dateConvert("local2utc", now()), "hh:mm:ss");
+				userStruct["expires"] = arguments.user.expires;
 			}
 			if (structKeyExists(arguments.user, "email")) {
 				userStruct["email"] = arguments.user.email;
