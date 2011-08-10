@@ -6,20 +6,20 @@
 	http://github.com/ryanmcilmoyl/CFUserVoiceSSO
 --->
 <cfcomponent>
-	<cfproperty name="accountKey" type="string" />
-	<cfproperty name="apiKey" type="string" /> 
+	<cfproperty name="uservoice_subdomain" type="string" />
+	<cfproperty name="sso_key" type="string" /> 
 
 	<cfset variables.initVectorString = "OpenSSL for Ruby" /><!--- DO NOT CHANGE, constant for UV encrypt/decrypt --->
 	<cfset variables.blockSize = 16 />
 	
 	<cffunction name="init" access="public" returntype="any" hint="The public constructor" output="false" >
-		<cfargument name="accountKey" type="string" required="true" hint="Your UserVoice account key" />
-		<cfargument name="apiKey" type="string" required="true" hint="Your UserVoice API key" />
+		<cfargument name="uservoice_subdomain" type="string" required="true" hint="Your UserVoice account key" />
+		<cfargument name="sso_key" type="string" required="true" hint="Your UserVoice API key" />
 
-		<cfset variables.accountKey = arguments.accountKey />
-		<cfset variables.apiKey = arguments.apiKey />
+		<cfset variables.uservoice_subdomain = arguments.uservoice_subdomain />
+		<cfset variables.sso_key = arguments.sso_key />
 		<cfset variables.initVectorBytes = variables.initVectorString.getBytes() />
-		<cfset variables.encryptionKey = generateKey(arguments.accountKey, arguments.apiKey) />
+		<cfset variables.encryptionKey = generateKey(arguments.uservoice_subdomain, arguments.sso_key) />
 
 		<cfreturn this />
 	</cffunction>
@@ -115,11 +115,11 @@
 	</cffunction>
 
 	<cffunction name="generateKey" access="private" returntype="string" hint="Generates the Base64 encoded encryption key" output="false">
-		<cfargument name="accountKey" type="string" required="true" />
-		<cfargument name="apiKey" type="string" required="true" />
+		<cfargument name="uservoice_subdomain" type="string" required="true" />
+		<cfargument name="sso_key" type="string" required="true" />
 
 		<cfscript>
-			var salted = arguments.apiKey & arguments.accountKey;
+			var salted = arguments.sso_key & arguments.uservoice_subdomain;
 			var hashed = binaryDecode(hash(salted, "sha"), "hex");
 			var trunc = arrayNew(1);
 			var i = 1;
