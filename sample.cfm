@@ -1,6 +1,6 @@
 <cfsetting enablecfoutputonly="true">
-<cfset variables.accountKey = getProfileString("config.ini", "Keys", "accountKey")> 
-<cfset variables.apiKey = getProfileString("config.ini", "Keys", "apiKey")>
+<cfset variables.uservoice_subdomain = getProfileString("config.ini", "Keys", "uservoice_subdomain")> 
+<cfset variables.sso_key = getProfileString("config.ini", "Keys", "sso_key")>
 <cfoutput>
 <!DOCTYPE html>
 <html>

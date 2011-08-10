@@ -1,3 +1,3 @@
 [Keys]
-accountKey = Account Key here
-apiKey = API Key here
+uservoice_subdomain = Account Key here
+sso_key = API Key here
