@@ -26,8 +26,10 @@
 
 	<cffunction name="generateToken" access="public" returntype="string" hint="Returns the Base64 encoded access token for the given user" output="false">
 		<cfargument name="user" type="struct" required="true" hint="The user to generate a token for.  Requires a 'guid' field.  'expires' field will be generated (for 1 day from now) if not provided" />
+		<cfargument name="urlEncode" type="boolean" default="false" hint="If true, the resulting token is URL encoded" />
 
 		<cfset var userStruct = structNew() />
+		<cfset var token = "" />
 		<cfif NOT structKeyExists(arguments.user, "guid")>
 			<cfthrow message="You must provide the 'guid' field'" />
 		<cfelse>
@@ -55,7 +57,7 @@
 				userStruct["locale"] = arguments.user.locale;
 			}
 			if (structKeyExists(arguments.user, "owner")) {
-				userStruct["owner"] = arguments.user.ownser;
+				userStruct["owner"] = arguments.user.owner;
 			}
 			if (structKeyExists(arguments.user, "admin")) {
 				userStruct["admin"] = arguments.user.admin;
@@ -79,7 +81,13 @@
 				userStruct["comment_updats"] = arguments.user.comment_updates;
 			}
 
-			return encode(serializeJSON(userStruct));
+			token = encode(serializeJSON(userStruct));
+
+			if (arguments.urlEncode) {
+				token = urlEncodedFormat(token);
+			}
+
+			return token;
 		</cfscript>
 	</cffunction>
 

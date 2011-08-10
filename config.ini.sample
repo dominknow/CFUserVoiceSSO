@@ -1,3 +1,33 @@
 [Keys]
 uservoice_subdomain = Account Key here
 sso_key = API Key here
+forum_url = http://feedback.yourforum.com
+[User]
+;These are the values to use for your test user
+
+;a unique identifier for the user in your system
+guid = 
+;The date the token should expire
+expires = 
+;The user's email address
+email = 
+;The user's display name
+display_name = 
+;The user's locale (language), ie. en
+locale = 
+;if accept, user is the account owner, with full access
+owner = deny
+;if accept, user is an account administrator, 
+admin = deny
+;Exclusive list of forums user has access to.  Doesn't apply to admins.
+allow_forums = 
+;List of forums the user is denied access to.  Doesn't apply to admins.
+deny_forums = 
+;Link to the user's profile
+url = 
+;Link to the user's avatar.
+avatar_url = 
+;Whether user receives updates on suggestions
+updates = false
+;Whether user receives updates on suggestion comments
+comment_updates = false
