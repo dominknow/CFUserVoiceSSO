@@ -63,10 +63,20 @@
 				userStruct["admin"] = arguments.user.admin;
 			}
 			if (structKeyExists(arguments.user, "allow_forums")) {
-				userStruct["allow_forums"] = arguments.user.allow_forums;
+				if (isArray(arguments.user.allow_forums)) {
+					userStruct["allow_forums"] = arguments.user.allow_forums;
+				}
+				else if (listLen(arguments.user.allow_forums)) {
+					userStruct["allow_forums"] = listToArray(arguments.user.allow_forums);
+				}
 			}
 			if (structKeyExists(arguments.user, "deny_forums")) {
-				userStruct["deny_forums"] = arguments.user.deny_forums;	
+				if (isArray(arguments.user.deny_forums)) {
+					userStruct["deny_forums"] = arguments.user.deny_forums;	
+				}
+				else if (listLen(arguments.user.deny_forums)) {
+					userStruct["deny_forums"] = listToArray(arguments.user.deny_forums);
+				}
 			}
 			if (structKeyExists(arguments.user, "url")) {
 				userStruct["url"] = arguments.user.url;
