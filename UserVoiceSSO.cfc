@@ -78,7 +78,7 @@
 				userStruct["updates"] = arguments.user.updates;
 			}
 			if (structKeyExists(arguments.user, "comment_updates")) {
-				userStruct["comment_updats"] = arguments.user.comment_updates;
+				userStruct["comment_updates"] = arguments.user.comment_updates;
 			}
 
 			token = encode(serializeJSON(userStruct));
